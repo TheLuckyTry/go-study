@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go-study/constant"
+	dbbase "go-study/task3/db-base"
 
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
@@ -17,7 +18,7 @@ type Students struct {
 
 // InitDB 初始化数据库
 func InitDB() *gorm.DB {
-	db := ConnectDB()
+	db := dbbase.ConnectDB()
 	err := db.AutoMigrate(&Students{})
 	if err != nil {
 		panic(err)
