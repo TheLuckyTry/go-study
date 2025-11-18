@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-study/constant"
 	dbbase "go-study/task3/db-base"
 
 	"gorm.io/gorm"
@@ -85,7 +86,7 @@ func (c *Comment) AfterCreate(tx *gorm.DB) error {
 
 func main() {
 	// 连接数据库
-	db := dbbase.ConnectDB()
+	db := dbbase.ConnectDB(constant.DBPATH)
 
 	// 自动迁移模型，创建对应的数据库表
 	err := db.AutoMigrate(&User{}, &Post{}, &Comment{})

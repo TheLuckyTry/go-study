@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	_ "fmt"
+	"go-study/constant"
 	_ "go-study/constant"
 	dbbase "go-study/task3/db-base"
 
@@ -73,7 +74,7 @@ func transferMoney(db *gorm.DB, fromAccountID, toAccountID uint, amount decimal.
 	})
 }
 func InitDB() *gorm.DB {
-	db := dbbase.ConnectDB()
+	db := dbbase.ConnectDB(constant.DBPATH)
 	err := db.AutoMigrate(&Accounts{}, &Transactions{})
 	if err != nil {
 		panic(err)

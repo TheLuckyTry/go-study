@@ -18,7 +18,7 @@ type Students struct {
 
 // InitDB 初始化数据库
 func InitDB() *gorm.DB {
-	db := dbbase.ConnectDB()
+	db := dbbase.ConnectDB(constant.DBPATH)
 	err := db.AutoMigrate(&Students{})
 	if err != nil {
 		panic(err)

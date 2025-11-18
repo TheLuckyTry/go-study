@@ -9,8 +9,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func ConnectDB() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open(constant.DBPATH), &gorm.Config{})
+func ConnectDB(dbPath string) *gorm.DB {
+	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
