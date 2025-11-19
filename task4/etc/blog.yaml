@@ -1,0 +1,11 @@
+  Name: blog
+  Host: 0.0.0.0
+  Port: 8080
+
+  Database:
+    Driver: github.com/glebarez/sqlite
+    Source: blog.db
+
+  JWT:
+    AccessSecret: a-simple-jwt-secret-key
+    AccessExpire: 86400 # 24小时

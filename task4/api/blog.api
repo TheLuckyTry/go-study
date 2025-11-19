@@ -1,0 +1,101 @@
+syntax = "v1"
+
+info(
+    title: "博客系统API"
+    desc: "一个简单的博客系统，包含用户认证和文章管理"
+    author: "your-name"
+    email: "your-email@example.com"
+)
+
+type (
+    // 用户注册请求
+    RegisterRequest {
+        Username string `json:"username"`
+        Password string `json:"password"`
+        Email    string `json:"email"`
+    }
+
+    // 用户注册响应
+    RegisterResponse {
+        Id       uint   `json:"id"`
+        Username string `json:"username"`
+        Email    string `json:"email"`
+    }
+
+    // 用户登录请求
+    LoginRequest {
+        Username string `json:"username"`
+        Password string `json:"password"`
+    }
+
+    // 用户登录响应
+    LoginResponse {
+        Token string `json:"token"`
+    }
+
+    // 用户信息响应
+    UserInfoResponse {
+        Id       uint   `json:"id"`
+        Username string `json:"username"`
+        Email    string `json:"email"`
+    }
+
+    // 创建文章请求
+    CreatePostRequest {
+        Title   string `json:"title"`
+        Content string `json:"content"`
+    }
+
+    // 文章响应
+    PostResponse {
+        Id        uint   `json:"id"`
+        Title     string `json:"title"`
+        Content   string `json:"content"`
+        UserID    uint   `json:"user_id"`
+        Username  string `json:"username"`
+        CreatedAt string `json:"created_at"`
+    }
+
+    // 创建评论请求
+    CreateCommentRequest {
+        PostID  uint   `json:"post_id"`
+        Content string `json:"content"`
+    }
+
+    // 评论响应
+    CommentResponse {
+        Id        uint   `json:"id"`
+        Content   string `json:"content"`
+        UserID    uint   `json:"user_id"`
+        Username  string `json:"username"`
+        PostID    uint   `json:"post_id"`
+        CreatedAt string `json:"created_at"`
+    }
+)
+
+@server(
+    jwt: Auth
+    group: user
+)
+service blog {
+    @handler register
+    post /api/user/register (RegisterRequest) returns (RegisterResponse)
+
+    @handler login
+    post /api/user/login (LoginRequest) returns (LoginResponse)
+
+    @handler userInfo
+    get /api/user/info returns (UserInfoResponse)
+
+    @handler createPost
+    post /api/posts (CreatePostRequest) returns (PostResponse)
+
+    @handler getPosts
+    get /api/posts returns ([]PostResponse)
+
+    @handler createComment
+    post /api/comments (CreateCommentRequest) returns (CommentResponse)
+
+    @handler getPostComments
+    get /api/posts/:postId/comments returns ([]CommentResponse)
+}
