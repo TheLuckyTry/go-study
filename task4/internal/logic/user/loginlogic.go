@@ -48,6 +48,10 @@ func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, 
 	}
 
 	return &types.LoginResponse{
-		Token: token,
+		Code:    200,
+		Message: "登录成功",
+		Data: types.TokenData{
+			Token: token,
+		},
 	}, nil
 }

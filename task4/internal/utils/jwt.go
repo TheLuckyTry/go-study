@@ -2,6 +2,7 @@ package utils
 
 import (
 	"context"
+	"encoding/json"
 	"go-study/task4/internal/config"
 	"time"
 
@@ -50,28 +51,13 @@ func ParseJWT(tokenString string, config config.Config) (*Claims, error) {
 
 // 从上下文获取用户ID - 修复版本
 func GetUserIDFromContext(ctx context.Context) (uint, bool) {
-	// 尝试从不同可能的键中获取用户ID
-	if userId, ok := ctx.Value("userId").(uint); ok {
-		return userId, true
+	if value := ctx.Value("user_id"); value != nil {
+		if number, ok := value.(json.Number); ok {
+			if intVal, err := number.Int64(); err == nil {
+				return uint(intVal), true
+			}
+		}
 	}
-	if userId, ok := ctx.Value("userId").(int64); ok {
-		return uint(userId), true
-	}
-	if userId, ok := ctx.Value("userId").(float64); ok {
-		return uint(userId), true
-	}
-	if userId, ok := ctx.Value("userId").(int); ok {
-		return uint(userId), true
-	}
-
-	// 尝试从 JWT 标准键中获取
-	if userId, ok := ctx.Value("userID").(uint); ok {
-		return userId, true
-	}
-	if userId, ok := ctx.Value("user_id").(uint); ok {
-		return userId, true
-	}
-
 	return 0, false
 }
 

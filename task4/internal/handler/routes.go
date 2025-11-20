@@ -16,12 +16,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/posts",
+				Path:    "/api/posts/list",
 				Handler: getPostsHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/posts/:id",
+				Path:    "/api/posts/detail/:id",
 				Handler: getPostHandler(serverCtx),
 			},
 			{
@@ -46,27 +46,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/comments",
+				Path:    "/api/comments/create",
 				Handler: createCommentHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/api/comments/:id",
+				Path:    "/api/comments/delete/:id",
 				Handler: deleteCommentHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/posts",
+				Path:    "/api/posts/create",
 				Handler: createPostHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,
-				Path:    "/api/posts/:id",
+				Path:    "/api/posts/update/:id",
 				Handler: updatePostHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/api/posts/:id",
+				Path:    "/api/posts/delete/:id",
 				Handler: deletePostHandler(serverCtx),
 			},
 			{

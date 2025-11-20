@@ -115,10 +115,10 @@ service blog {
 	post /api/user/login (LoginRequest) returns (LoginResponse)
 
 	@handler getPosts
-	get /api/posts returns (PostListResponse)
+	get /api/posts/list returns (PostListResponse)
 
 	@handler getPost
-	get /api/posts/:id returns (SinglePostResponse)
+	get /api/posts/detail/:id returns (SinglePostResponse)
 
 	@handler getPostComments
 	get /api/posts/:postId/comments returns (CommentListResponse)
@@ -133,18 +133,18 @@ service blog {
 	get /api/user/info returns (UserInfoResponse)
 
 	@handler createPost
-	post /api/posts (CreatePostRequest) returns (SinglePostResponse)
+	post /api/posts/create (CreatePostRequest) returns (SinglePostResponse)
 
 	@handler updatePost
-	put /api/posts/:id (UpdatePostRequest) returns (SinglePostResponse)
+	put /api/posts/update/:id (UpdatePostRequest) returns (SinglePostResponse)
 
 	@handler deletePost
-	delete /api/posts/:id returns (BaseResponse)
+	delete /api/posts/delete/:id returns (BaseResponse)
 
 	@handler createComment
-	post /api/comments (CreateCommentRequest) returns (BaseResponse)
+	post /api/comments/create (CreateCommentRequest) returns (BaseResponse)
 
 	@handler deleteComment
-	delete /api/comments/:id returns (BaseResponse)
+	delete /api/comments/delete/:id returns (BaseResponse)
 }
 
