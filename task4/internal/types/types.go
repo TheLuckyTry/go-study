@@ -9,8 +9,9 @@ type BaseResponse struct {
 }
 
 type CommentListResponse struct {
-	BaseResponse
-	Data []CommentResponse `json:"data"`
+	Code    int               `json:"code"`
+	Message string            `json:"message"`
+	Data    []CommentResponse `json:"data"`
 }
 
 type CommentResponse struct {
@@ -32,22 +33,21 @@ type CreatePostRequest struct {
 	Content string `json:"content"`
 }
 
-type LoginData struct {
-	Token string `json:"token"`
-}
-
 type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
 type LoginResponse struct {
-	Token string `json:"token"`
+	Code    int       `json:"code"`
+	Message string    `json:"message"`
+	Data    TokenData `json:"data"`
 }
 
 type PostListResponse struct {
-	BaseResponse
-	Data []PostResponse `json:"data"`
+	Code    int            `json:"code"`
+	Message string         `json:"message"`
+	Data    []PostResponse `json:"data"`
 }
 
 type PostResponse struct {
@@ -60,12 +60,6 @@ type PostResponse struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
-type RegisterData struct {
-	Id       uint   `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-}
-
 type RegisterRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -73,15 +67,19 @@ type RegisterRequest struct {
 }
 
 type RegisterResponse struct {
-	BaseResponse
-	Data     RegisterData `json:"data"`
-	Id       uint         `json:"id"`
-	Username string       `json:"username"`
-	Email    string       `json:"email"`
+	Code    int      `json:"code"`
+	Message string   `json:"message"`
+	Data    UserData `json:"data"`
 }
+
 type SinglePostResponse struct {
-	BaseResponse
-	Data PostResponse `json:"data"`
+	Code    int          `json:"code"`
+	Message string       `json:"message"`
+	Data    PostResponse `json:"data"`
+}
+
+type TokenData struct {
+	Token string `json:"token"`
 }
 
 type UpdatePostRequest struct {
@@ -89,14 +87,14 @@ type UpdatePostRequest struct {
 	Content string `json:"content"`
 }
 
-type UserInfoData struct {
+type UserData struct {
 	Id       uint   `json:"id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
 }
 
 type UserInfoResponse struct {
-	Id       uint   `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
+	Code    int      `json:"code"`
+	Message string   `json:"message"`
+	Data    UserData `json:"data"`
 }

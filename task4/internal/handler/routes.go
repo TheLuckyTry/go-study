@@ -6,7 +6,6 @@ package handler
 import (
 	"net/http"
 
-	user "go-study/task4/internal/handler/user"
 	"go-study/task4/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -16,61 +15,66 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodPost,
-				Path:    "/api/comments",
-				Handler: user.CreateCommentHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/api/comments/:id",
-				Handler: user.DeleteCommentHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/posts",
-				Handler: user.CreatePostHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodGet,
 				Path:    "/api/posts",
-				Handler: user.GetPostsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPut,
-				Path:    "/api/posts/:id",
-				Handler: user.UpdatePostHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/api/posts/:id",
-				Handler: user.DeletePostHandler(serverCtx),
+				Handler: getPostsHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/api/posts/:id",
-				Handler: user.GetPostHandler(serverCtx),
+				Handler: getPostHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/api/posts/:postId/comments",
-				Handler: user.GetPostCommentsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/user/info",
-				Handler: user.UserInfoHandler(serverCtx),
+				Handler: getPostCommentsHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/api/user/login",
-				Handler: user.LoginHandler(serverCtx),
+				Handler: loginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/api/user/register",
-				Handler: user.RegisterHandler(serverCtx),
+				Handler: registerHandler(serverCtx),
 			},
 		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/comments",
+				Handler: createCommentHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/api/comments/:id",
+				Handler: deleteCommentHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/posts",
+				Handler: createPostHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/api/posts/:id",
+				Handler: updatePostHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/api/posts/:id",
+				Handler: deletePostHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/user/info",
+				Handler: userInfoHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.JWT.AccessSecret),
 	)
 }
