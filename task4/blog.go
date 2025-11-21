@@ -6,13 +6,13 @@ package main
 import (
 	"flag"
 	"fmt"
-
 	"go-study/task4/internal/config"
 	"go-study/task4/internal/handler"
 	"go-study/task4/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 var configFile = flag.String("f", "D:\\go-study\\go-study\\task4\\etc\\blog.yaml", "the config file")
@@ -31,6 +31,8 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 
+	// 设置自定义错误处理 - 使用正确的函数
+	httpx.SetErrorHandler(handler.CustomErrorHandler)
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

@@ -55,7 +55,7 @@ func (l *CreatePostLogic) CreatePost(req *types.CreatePostRequest) (resp *types.
 	post := model.Post{
 		Title:   req.Title,
 		Content: req.Content,
-		UserID:  uint(userId),
+		UserID:  userId,
 	}
 
 	result := l.svcCtx.DB.Create(&post)
@@ -73,6 +73,6 @@ func (l *CreatePostLogic) CreatePost(req *types.CreatePostRequest) (resp *types.
 		Content:   post.Content,
 		UserID:    userId,
 		Username:  username,
-		CreatedAt: post.CreatedAt.Format(time.RFC3339),
+		CreatedAt: post.CreatedAt.Format(time.DateTime),
 	}, nil
 }

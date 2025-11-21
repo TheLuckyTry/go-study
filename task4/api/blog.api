@@ -3,8 +3,8 @@ syntax = "v1"
 info (
 	title:  "博客系统API"
 	desc:   "一个简单的博客系统，包含用户认证和文章管理"
-	author: "your-name"
-	email:  "your-email@example.com"
+	author: "well"
+	email:  "well@qq.com"
 )
 
 type (
@@ -31,8 +31,7 @@ type (
 	}
 	// 用户注册响应
 	RegisterResponse {
-		Code    int      `json:"code"`
-		Message string   `json:"message"`
+		BaseResponse `json:"baseResponse"`
 		Data    UserData `json:"data"`
 	}
 	// 用户登录请求
@@ -42,14 +41,12 @@ type (
 	}
 	// 用户登录响应
 	LoginResponse {
-		Code    int       `json:"code"`
-		Message string    `json:"message"`
+		BaseResponse `json:"baseResponse"`
 		Data    TokenData `json:"data"`
 	}
 	// 用户信息响应
 	UserInfoResponse {
-		Code    int      `json:"code"`
-		Message string   `json:"message"`
+		BaseResponse `json:"baseResponse"`
 		Data    UserData `json:"data"`
 	}
 	// 创建文章请求
@@ -74,14 +71,12 @@ type (
 	}
 	// 文章列表响应
 	PostListResponse {
-		Code    int            `json:"code"`
-		Message string         `json:"message"`
+		BaseResponse `json:"baseResponse"`
 		Data    []PostResponse `json:"data"`
 	}
 	// 单篇文章响应
 	SinglePostResponse {
-		Code    int          `json:"code"`
-		Message string       `json:"message"`
+		BaseResponse `json:"baseResponse"`
 		Data    PostResponse `json:"data"`
 	}
 	// 创建评论请求
@@ -100,8 +95,7 @@ type (
 	}
 	// 评论列表响应
 	CommentListResponse {
-		Code    int               `json:"code"`
-		Message string            `json:"message"`
+		BaseResponse `json:"baseResponse"`
 		Data    []CommentResponse `json:"data"`
 	}
 )

@@ -8,6 +8,10 @@ type BaseResponse struct {
 	Message string `json:"message"`
 }
 
+type CommentListRequest struct {
+	Id string `path:"id"`
+}
+
 type CommentListResponse struct {
 	Code    int               `json:"code"`
 	Message string            `json:"message"`
@@ -85,6 +89,11 @@ type TokenData struct {
 type UpdatePostRequest struct {
 	Title   string `json:"title"`
 	Content string `json:"content"`
+	Id      string `path:"id"`
+}
+
+type DeletePostRequest struct {
+	Id string `path:"id"`
 }
 
 type UserData struct {
@@ -92,7 +101,9 @@ type UserData struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
 }
-
+type GetPostRequest struct {
+	Id string `path:"id"`
+}
 type UserInfoResponse struct {
 	Code    int      `json:"code"`
 	Message string   `json:"message"`
