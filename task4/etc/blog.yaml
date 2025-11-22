@@ -2,6 +2,8 @@
   Host: 0.0.0.0
   Port: 8087
 
+  Timeout: 60000
+
   Database:
     Driver: github.com/glebarez/sqlite
     Source: blog.db

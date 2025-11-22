@@ -9,7 +9,7 @@ type BaseResponse struct {
 }
 
 type CommentListRequest struct {
-	Id string `path:"id"`
+	Id string `path:"postId"`
 }
 
 type CommentListResponse struct {
