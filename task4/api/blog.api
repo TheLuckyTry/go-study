@@ -98,6 +98,35 @@ type (
 		BaseResponse `json:"baseResponse"`
 		Data    []CommentResponse `json:"data"`
 	}
+
+	type RequestLogQueryRequest struct {
+        Page     int    `json:"page"`
+        PageSize int    `json:"pageSize"`
+        Method   string `json:"method"`
+        Path     string `json:"path"`
+        Username string `json:"username"`
+        userId    uint   `json:"userId"`
+    }
+
+    type RequestLogResponse {
+        ID         uint   `json:"id"`
+        Method     string `json:"method"`
+        Path       string `json:"path"`
+        StatusCode int    `json:"status_code"`
+        Username   string `json:"username"`
+        IPAddress  string `json:"ip_address"`
+        UserId     uint   `json:"user_id"`
+        Request     string `json:"request"`
+        Response   string `json:"response"`
+        Duration   int64  `json:"duration"`
+        CreatedAt  string `json:"created_at"`
+    }
+
+    type RequestLogListResponse {
+        BaseResponse
+        Data []RequestLogResponse `json:"data"`
+        Total int64 `json:"total"`
+    }
 )
 
 // 公开接口 - 不需要认证
@@ -116,6 +145,9 @@ service blog {
 
 	@handler getPostComments
 	get /api/posts/:postId/comments returns (CommentListResponse)
+
+	@handler getRequestLogs
+    get /api/admin/request-logs (RequestLogQueryRequest) returns (RequestLogListResponse)
 }
 
 // 需要认证的接口

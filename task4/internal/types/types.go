@@ -31,6 +31,9 @@ type CreateCommentRequest struct {
 	PostID  uint   `json:"post_id"`
 	Content string `json:"content"`
 }
+type DeleteCommentRequest struct {
+	Id string `path:"id"`
+}
 
 type CreatePostRequest struct {
 	Title   string `json:"title"`
@@ -108,4 +111,38 @@ type UserInfoResponse struct {
 	Code    int      `json:"code"`
 	Message string   `json:"message"`
 	Data    UserData `json:"data"`
+}
+
+type RequestLogQueryRequest struct {
+	Page     int    `form:"page,default=1"`
+	PageSize int    `form:"pageSize,default=20"`
+	Method   string `form:"method,optional"`
+	Path     string `form:"path,optional"`
+	Username string `form:"username,optional"`
+	UserId   uint   `form:"userId,optional"`
+}
+
+type RequestLogResponse struct {
+	ID         uint   `json:"id"`
+	Method     string `json:"method"`
+	Path       string `json:"path"`
+	StatusCode int    `json:"status_code"`
+	Username   string `json:"username"`
+	IPAddress  string `json:"ip_address"`
+	UserID     uint   `json:"user_id"`
+	UserAgent  string `json:"user_agent"`
+	Request    string `json:"request"`
+	Response   string `json:"response"`
+	Error      string `json:"error"`
+	Duration   int64  `json:"duration"`
+	CreatedAt  string `json:"created_at"`
+}
+
+type RequestLogListResponse struct {
+	Code     int                  `json:"code"`
+	Message  string               `json:"message"`
+	Data     []RequestLogResponse `json:"data"`
+	Page     int                  `json:"page"`
+	PageSize int                  `json:"pageSize"`
+	Total    int64                `json:"total"`
 }

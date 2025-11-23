@@ -1,7 +1,6 @@
   Name: blog
   Host: 0.0.0.0
   Port: 8087
-
   Timeout: 60000
 
   Database:
@@ -11,3 +10,15 @@
   JWT:
     AccessSecret: a-simple-jwt-secret-key
     AccessExpire: 86400 # 24小时
+
+  Log:
+    ServiceName: blog-api
+    Mode: file
+    Level: info
+    Path: logs
+    Encoding: json
+    TimeFormat: "2006-01-02T15:04:05.000Z07:00"
+    Stat: false
+    KeepDays: 7
+    MaxBackups: 3
+    MaxSize: 128

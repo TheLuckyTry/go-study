@@ -8,6 +8,7 @@ package svc
 
 import (
 	"go-study/task4/internal/config"
+	"go-study/task4/internal/utils"
 	"go-study/task4/model"
 
 	"gorm.io/gorm"
@@ -20,6 +21,10 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	db := model.InitDB()
+	// 记录数据库连接成功
+	utils.LogSystem(nil, "database", "数据库连接成功",
+		"driver", "sqlite",
+		"source", "blog.db")
 	return &ServiceContext{
 		Config: c,
 		DB:     db,

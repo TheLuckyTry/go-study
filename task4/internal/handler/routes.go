@@ -39,6 +39,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/user/register",
 				Handler: registerHandler(serverCtx),
 			},
+
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/log/page",
+				Handler: getRequestLogshandler(serverCtx),
+			},
 		},
 	)
 
